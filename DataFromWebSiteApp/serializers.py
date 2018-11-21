@@ -6,18 +6,18 @@ class UrlSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = WebSiteText
-        fields = ['website_link']
+        fields = ['website_url']
 
 
 class WebSiteTextSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = WebSiteText
-        fields = ['text', 'website_link']
+        fields = ['text', 'website_url']
 
 
 class WebSiteImagesSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = WebSiteImages
-        fields = ['images', 'website_link']
+        fields = ['images', 'website_url']
