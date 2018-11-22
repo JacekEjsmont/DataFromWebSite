@@ -66,9 +66,9 @@ class ImagesFromWebsiteView(APIView):
             return Response({'Error': 'Images already in database'}, status=status.HTTP_400_BAD_REQUEST)
 
         scrapper = ScrapFromWebsite(website_url)
-        images = scrapper.get_scraped_images()
+        scrapped_images = scrapper.get_scraped_images()
 
-        serializer = WebsiteImagesSerializer(data={'website_url': website_url, 'images': json.dumps(images, ensure_ascii=False)})
+        serializer = WebsiteImagesSerializer(data={'website_url': website_url, 'images': json.dumps(scrapped_images, ensure_ascii=False)})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
