@@ -4,5 +4,5 @@ from DataFromWebSiteApp import views
 
 urlpatterns = [
     path('text/', views.TextFromWebsiteView.as_view(), name='text'),
-    path('images/', views.ImagesFromWebSiteView.as_view(), name='images')
+    path('images/', views.ImagesFromWebsiteView.as_view(), name='images')
 ]

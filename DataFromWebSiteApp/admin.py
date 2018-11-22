@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import WebSiteText, WebSiteImages
+from .models import WebsiteText, WebsiteImages
 # Register your models here.
-admin.site.register(WebSiteText)
-admin.site.register(WebSiteImages)
+admin.site.register(WebsiteText)
+admin.site.register(WebsiteImages)

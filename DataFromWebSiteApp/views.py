@@ -1,12 +1,11 @@
 import json
 import requests
-from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import WebSiteText, WebSiteImages
+from .models import WebsiteText, WebsiteImages
 from .serializers import WebSiteTextSerializer, WebSiteImagesSerializer, UrlSerializer
-from .scraping_website_utils import ScrapFromWebSite
+from .scraping_website_utils import ScrapFromWebsite
 # Create your views here.
 
 
@@ -14,7 +13,7 @@ class TextFromWebsiteView(APIView):
     serializer_class = UrlSerializer
 
     def get(self, request):
-        web_site_text = WebSiteText.objects.all()
+        web_site_text = WebsiteText.objects.all()
         serializer = WebSiteTextSerializer(web_site_text, many=True)
         return Response(serializer.data)
 
@@ -26,10 +25,10 @@ class TextFromWebsiteView(APIView):
             requests.get(website_url)
         except ValueError:
             return Response({'Error': 'Can not connect with given url.'
-                                      'This website does not exist or you passed url incorrectly'},
+                                      'This website does not exist or you have passed url incorrectly'},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        scrapper = ScrapFromWebSite(website_url)
+        scrapper = ScrapFromWebsite(website_url)
         scraped_text = scrapper.get_scraped_text()
 
         serializer = WebSiteTextSerializer(data={'website_url': website_url, 'text': json.dumps(scraped_text, ensure_ascii=False)})
@@ -39,25 +38,26 @@ class TextFromWebsiteView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ImagesFromWebSiteView(APIView):
+class ImagesFromWebsiteView(APIView):
     serializer_class = UrlSerializer
 
     def get(self, request):
-        web_site_images = WebSiteImages.objects.all()
+        web_site_images = WebsiteImages.objects.all()
         serializer = WebSiteImagesSerializer(web_site_images, many=True)
         return Response(serializer.data)
 
     def post(self, request):
         website_url = request.data.get('website_url')
 
+        # Validates given website url
         try:
             requests.get(website_url)
         except ValueError:
             return Response({'Error': 'Can not connect with given url. '
-                                      'This website does not exist or you passed url incorrectly'},
+                                      'This website does not exist or you have passed url incorrectly'},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        scrapper = ScrapFromWebSite(website_url)
+        scrapper = ScrapFromWebsite(website_url)
         images = scrapper.get_scraped_images()
 
         serializer = WebSiteImagesSerializer(data={'website_url': website_url, 'images': json.dumps(images, ensure_ascii=False)})

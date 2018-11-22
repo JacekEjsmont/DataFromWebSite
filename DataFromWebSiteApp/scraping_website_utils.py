@@ -3,7 +3,7 @@ import re
 from bs4 import BeautifulSoup
 
 
-class ScrapFromWebSite:
+class ScrapFromWebsite:
     def __init__(self, website_url):
         self.website_url = website_url
         self.html = requests.get(self.website_url).content
