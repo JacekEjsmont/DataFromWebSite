@@ -3,6 +3,6 @@ from django.urls import path, include
 from DataFromWebSiteApp import views
 
 urlpatterns = [
-    path('text/', views.TextFromWebsiteView.as_view(), name='text'),
-    path('images/', views.ImagesFromWebsiteView.as_view(), name='images')
+    path('scrape_text/', views.TextFromWebsiteView.as_view(), name='scrape_text'),
+    path('scrape_images/', views.ImagesFromWebsiteView.as_view(), name='scrape_images')
 ]

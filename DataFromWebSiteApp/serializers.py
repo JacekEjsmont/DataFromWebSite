@@ -9,14 +9,14 @@ class UrlSerializer(serializers.ModelSerializer):
         fields = ['website_url']
 
 
-class WebSiteTextSerializer(serializers.ModelSerializer):
+class WebsiteTextSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = WebsiteText
         fields = ['text', 'website_url']
 
 
-class WebSiteImagesSerializer(serializers.ModelSerializer):
+class WebsiteImagesSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = WebsiteImages
